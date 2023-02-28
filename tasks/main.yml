@@ -1,0 +1,20 @@
+---
+- name: main | include distro dependent vars
+  ansible.builtin.include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+      - '{{ ansible_distribution | lower }}.yml'
+      skip: yes
+
+- name: main | include distro dependent tasks
+  ansible.builtin.include_tasks: '{{ item }}'
+  with_first_found:
+    - files:
+      - '{{ ansible_distribution | lower }}.yml'
+      skip: yes
+
+- name: main | install steamcmd
+  become: yes
+  ansible.builtin.package:
+    name: '{{ steamcmd_package_name }}'
+    state: latest

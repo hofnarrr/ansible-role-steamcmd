@@ -1,0 +1,16 @@
+galaxy_info:
+  role_name: steamcmd
+  author: hofnarr
+  description: SteamCMD - Steam Console Client
+  license: MIT
+
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+
+  galaxy_tags:
+    - steamcmd
+    - steam
+    - valve
+    - csgo

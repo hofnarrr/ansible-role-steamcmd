@@ -1,0 +1,25 @@
+---
+- block:
+  - name: debian | enable non-free repo
+    ansible.builtin.replace:
+      path: /etc/apt/sources.list
+      regexp: '^(deb(?!.* non-free).*)'
+      replace: '\1 non-free'
+    when: steamcmd_debian.enable_nonfree_repo | bool
+
+  - name: debian | add i386 arch
+    ansible.builtin.command: dpkg --add-architecture i386
+
+  - name: debian | sell my soul to gaben
+    ansible.builtin.shell: "echo 'steamcmd steam/question string I AGREE' | debconf-set-selections"
+
+  - name: debian | update apt cache
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: debian | add steamcmd to the global $PATH
+    ansible.builtin.copy:
+      dest: /etc/profile.d/steamcmd.sh
+      content: 'PATH=$PATH:{{ steamcmd_install_dir }}'
+
+  become: yes

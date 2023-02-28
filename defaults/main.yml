@@ -1,0 +1,6 @@
+---
+steamcmd_package_name: steamcmd
+steamcmd_install_dir: /usr/games
+
+steamcmd_debian:
+  enable_nonfree_repo: yes
