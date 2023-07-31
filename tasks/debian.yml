@@ -3,7 +3,7 @@
   - name: debian | enable non-free repo
     ansible.builtin.replace:
       path: /etc/apt/sources.list
-      regexp: '^(deb(?!.* non-free).*)'
+      regexp: '^(deb(?!.* non-free(?!-)).*)'
       replace: '\1 non-free'
     when: steamcmd_debian.enable_nonfree_repo | bool
 
